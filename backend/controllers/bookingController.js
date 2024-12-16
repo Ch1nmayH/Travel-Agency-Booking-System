@@ -22,8 +22,6 @@ const postBookings = async (req, res) => {
         if(!userIdExists){
             return res.status(400).json({message: "User not found"});
         }
-        console.log(Date.now());
-
         const newBooking = {
             name,
             email,
