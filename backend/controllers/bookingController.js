@@ -1,16 +1,29 @@
 import Booking from '../models/bookingModel.js';
+import Package from '../models/packageModel.js';
+import User from '../models/userModel.js';
 
 //Post Bookings
 
 const postBookings = async (req, res) => {
     try {
-        const { name, email, phone, numberOfTravelers,specialRequest, packageId, userId, bookingDate } = req.body;
+        const { name, email, phone, numberOfTravelers,specialRequest, packageId, user, bookingDate } = req.body;
         let totalPrice = 0;
         // Get the package price
         const packagePrice = await Package.findById(packageId);
+        const userIdExists = await User.findById(user);
+        if(!packagePrice){
+            return res.status(400).json({message: "Package not found"});
+        }
+
         if (packagePrice) {
             totalPrice = packagePrice.price * numberOfTravelers;
         }
+
+        if(!userIdExists){
+            return res.status(400).json({message: "User not found"});
+        }
+        console.log(Date.now());
+
         const newBooking = {
             name,
             email,
@@ -18,7 +31,7 @@ const postBookings = async (req, res) => {
             numberOfTravelers,
             specialRequest,
             packageId,
-            userId,
+            user,
             bookingDate,
             totalPrice
         };

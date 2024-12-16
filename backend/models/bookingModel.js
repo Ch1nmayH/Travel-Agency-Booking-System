@@ -27,7 +27,7 @@ const bookingSchema = mongoose.Schema(
         required: true,
         ref: "User",
         },
-        package: {
+        packageId: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: "Package",

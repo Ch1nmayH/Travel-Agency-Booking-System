@@ -1,5 +1,6 @@
 import User from '../models/userModel.js';
 import jwt from 'jsonwebtoken';
+import bcrypt from 'bcryptjs';
 
 //Signup
 const signup = async (req, res) => {
@@ -40,7 +41,7 @@ const signin = async (req, res) => {
         const user = await User.findOne({
             email: email,
         });
-        if (user && (await user.matchPassword(password))) {
+        if (user && (await bcrypt.compare(password, user.password))) {
             const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
                 expiresIn: '30d',
             });
