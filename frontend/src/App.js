@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./index.css";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
+import Cookies from "js-cookie";
 import NavBar from "./Components/NavBar";
 import ErrorPage from "./Pages/ErrorPage";
 import HomePage from "./Pages/HomePage";
@@ -13,8 +14,7 @@ import AdminPanel from "./Pages/AdminPanel";
 import About from "./Pages/About";
 import Package from "./Pages/Package";
 import Packages from "./Pages/Packages";
-
-
+import UserContext from "./utils/CreateContext";
 
 const Layout = () => (
   <div className="flex flex-col min-h-screen bg-gray-100">
@@ -69,16 +69,23 @@ const router = createBrowserRouter([
   },
   {
     path: "/unauthenticated",
-    element : <UnauthenticatedPage/>
-  }
+    element: <UnauthenticatedPage />,
+  },
 ]);
 
 function App() {
-  return (
-<>
-      <RouterProvider router={router} />;     
-  </>
+  const [token, setToken] = useState(Cookies.get("token") || null);
+  useEffect(() => {
+    if (token) setToken(token);
+    else setToken(null);
+  }, []);
 
+  return (
+    <>
+      <UserContext.Provider value={{ token, setToken }}>
+        <RouterProvider router={router} />;
+      </UserContext.Provider>
+    </>
   );
 }
 
