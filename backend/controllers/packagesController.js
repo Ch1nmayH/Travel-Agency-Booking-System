@@ -21,7 +21,22 @@ const getPackages = async (req, res) => {
 //Add new Package
 
 const postPackages = async (req, res) => {
- 
+    try {
+        const { title, description, price, availableDate, image, duration } = req.body;
+        const newPackage = new Package({
+            title,
+            description,
+            price,
+            availableDate,
+            image,
+            duration
+        });
+        const savedPackage = await newPackage.save();
+        res.json(savedPackage);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Server Error" });
+    }
 }
 
 //Update Package
