@@ -1,12 +1,22 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
-import CloseIcon from "@mui/icons-material/Close";import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
+import CloseIcon from "@mui/icons-material/Close";
+import Cookies from "js-cookie";
+import UserContext from "../utils/CreateContext";
 
 
 const NavBar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const token = false; // Dummy token value for authentication
+  const { token, setToken } = useContext(UserContext);
+
+  const handleLogout = () => {
+    if (token) {
+      setToken(null);
+      Cookies.remove("token");
+      navigate("/login");
+    }
+  };
 
   const menuLinks = [
     { name: "Home", path: "/" },
@@ -57,7 +67,7 @@ const NavBar = () => {
             )}
             {token && (
               <Link to={"/"}>
-                <button className="relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200">
+                <button className="relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200" onClick={handleLogout}>
                   <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
                     Logout
                   </span>
