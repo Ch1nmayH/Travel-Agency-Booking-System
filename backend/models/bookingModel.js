@@ -36,10 +36,9 @@ const bookingSchema = mongoose.Schema(
         type: Date,
         required: true,
         },
-        bookingStatus: {
-        type: String,
+        totalPrice: {
+        type: Number,
         required: true,
-        default: "Pending",
         },
     },
     {
