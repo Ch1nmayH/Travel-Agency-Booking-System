@@ -22,16 +22,16 @@ const getPackages = async (req, res) => {
 
 const postPackages = async (req, res) => {
     try {
-        const { title, description, price, availableDate, image, duration } = req.body;
-        const newPackage = new Package({
+        const { title, description, price, availableDates } = req.body;
+        const image = req.file.path;
+        const newPackage = {
             title,
             description,
             price,
-            availableDate,
+            availableDates,
             image,
-            duration
-        });
-        const savedPackage = await newPackage.save();
+        };
+        const savedPackage = await Package.create(newPackage);
         res.json(savedPackage);
     } catch (error) {
         console.error(error);

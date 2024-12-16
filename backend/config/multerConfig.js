@@ -4,12 +4,18 @@ import fs from "fs";
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, 'uploads/packages');
+        const dir = "uploads/packages/";
+        cb(null, dir);
         fs.mkdirSync(dir, { recursive: true });
         cb(null, dir); // Set where to store the images
       },
     filename: (req, file, cb) => {
-        cb(null, `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`);
+        const { title } = req.body;
+        if (!title) {
+            return cb(new Error('Title is required for naming the image.'));
+        }
+        // Append the original file extension
+        cb(null, `${title}${path.extname(file.originalname)}`);
 
     },        
     })

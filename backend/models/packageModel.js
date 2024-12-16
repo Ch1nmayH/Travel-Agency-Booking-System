@@ -20,7 +20,6 @@ const packageSchema = mongoose.Schema(
     },
     image: {
       type: String,
-      required: true,
     },
   },
   {
