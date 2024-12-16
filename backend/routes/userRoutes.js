@@ -6,4 +6,6 @@ router.get('/', (req, res) => {
     res.send('User Api');
 })
 
+
+
 export default router;
