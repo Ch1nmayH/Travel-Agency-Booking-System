@@ -7,10 +7,12 @@ import packagesRoutes from './routes/packagesRoutes.js';
 import bookingRoutes from './routes/bookingRoutes.js';
 import adminRoutes from './routes/adminRoutes.js';
 import userRoutes from './routes/userRoutes.js';
+import cookieParser from 'cookie-parser';
 
 const app = express();
 app.use(cors());
 app.use(bodyParser.json(), bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 app.use('/api/packages', packagesRoutes);
 app.use('/api/bookings', bookingRoutes);
