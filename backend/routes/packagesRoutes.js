@@ -7,6 +7,6 @@ const router = express.Router();
 //     res.send('Packages Api');
 // })
 
-router.get("/", packagesController.getPackages); 
+router.get("/:id?", packagesController.getPackages); 
 
 export default router;

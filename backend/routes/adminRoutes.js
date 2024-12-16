@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
 })
 
 router.post("/packages", upload.single("image"), packagesController.postPackages); 
-router.put("/packages", packagesController.updatePackages); 
+router.put("/packages", upload.single("image"), packagesController.updatePackages); 
 router.delete("/packages", packagesController.deletePackages); 
 
 export default router;
