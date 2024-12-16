@@ -18,7 +18,8 @@ const Register = () => {
   const [cpasswordError, setCPasswordError] = useState("");
   const [serverError, setServerError] = useState("");
 
-  
+  const navigate = useNavigate();
+
   // Validation functions
   const validateFirstName = () => {
     if (!firstName) return "First name is required";
@@ -87,15 +88,18 @@ const Register = () => {
         }
       );
 
-      if (response.status === 200 && response.data.message === "User already exists with this email") {
+      if (response.status === 200 && response.data.error === "User already exists with this email") {
         setEmailError("Email already exists");
       } 
+      else if (response.status === 201) {
+        navigate("/login");
+      }
     } catch (error) { 
       setServerError("Error registering user. Please try again.");
     }
   };
 
-  const navigate = useNavigate();
+ 
   return (
     <div
       className="flex flex-col justify-center items-center min-h-[calc(100vh-120px)] bg-cover bg-center"

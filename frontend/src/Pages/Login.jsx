@@ -73,7 +73,7 @@ const Login = () => {
         Cookies.set("token", response.data.token, { expires: 1 });
         setToken(response.data.token);
 
-        if (response.data.user.isAdmin) {
+        if (response.data.isAdmin) {
           navigate("/admin"); // Redirect to admin dashboard if user is admin
         } else navigate("/");
       }

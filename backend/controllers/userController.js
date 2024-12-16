@@ -8,7 +8,7 @@ const signup = async (req, res) => {
     try {
         const userExists = await User.findOne({ email: email });
         if (userExists) {
-            return res.status(400).json({ error: "User already exists" });
+            return res.status(200).json({ error: "User already exists with this email" });
 
         }
         const user = await User.create({
@@ -49,7 +49,7 @@ const signin = async (req, res) => {
             res.cookie('token', token, {
                 httpOnly: true,
                 expiresIn: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
-            }).status(200).json({
+            }).status(201).json({
                 _id: user._id,
                 name: user.name,
                 email: user.email,
