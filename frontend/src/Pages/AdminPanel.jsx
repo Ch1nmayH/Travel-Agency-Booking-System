@@ -35,7 +35,7 @@ const AdminPanel = () => {
           }
         );
 
-        if (adminValidation.status === 200) {
+        if (adminValidation.status === 201 && adminValidation.data.isAdmin) {
           toast.success("Welcome Admin!");
         } else {
           toast.error("Unauthorized access. Redirecting to login page...");
@@ -48,7 +48,7 @@ const AdminPanel = () => {
         Navigate("/notAuthorized");
       }
     }
-  }, [token, Navigate]);
+  }, [token,]);
 
   useEffect(() => {
     // Fetch packages when the component mounts
