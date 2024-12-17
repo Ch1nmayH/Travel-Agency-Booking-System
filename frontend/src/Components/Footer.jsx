@@ -18,7 +18,6 @@ const Footer = () => {
             <nav className="flex flex-col md:flex-row gap-4">
               <Link to="/" className="hover:text-cyan-500 transition ease-in-out">Home</Link>
               <Link to="/packages" className="hover:text-cyan-500 transition ease-in-out">Packages</Link>
-              <Link to="/about" className="hover:text-cyan-500 transition ease-in-out">About</Link>
             </nav>
           </div>
 
