@@ -6,7 +6,6 @@ import BannerImage from "../Assets/banner.jpeg";
 
 const HomePage = () => {
   const [packages, setPackages] = useState([]); 
-  const [price, setPrice] = useState(0);
   const [loading, setLoading] = useState(true); // Add loading state
   const [error, setError] = useState(null); // Add error state
 
