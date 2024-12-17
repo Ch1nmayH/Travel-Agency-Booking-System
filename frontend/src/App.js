@@ -14,6 +14,7 @@ import AdminPanel from "./Pages/AdminPanel";
 import Package from "./Pages/Package";
 import Packages from "./Pages/Packages";
 import UserContext from "./utils/CreateContext";
+import Book from "./Pages/Book";
 
 const Layout = () => (
   <div className="flex flex-col min-h-screen bg-gray-100">
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
       {
         path: "/packages",
         element: <Packages />,
+      },
+      {
+        path: "/book/:packageId",
+        element: <Book/>,
       },
       {
         path: "/login",
