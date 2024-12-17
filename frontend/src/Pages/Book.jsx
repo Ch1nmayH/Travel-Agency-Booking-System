@@ -124,7 +124,7 @@ const Book = () => {
         toast.success("Booking Successful.");
         if (response.status === 201) {
           setTimeout(() => {
-            navigate(`/bookingSuccess/${response.data._id}`);
+            navigate(`/bookingSuccess/${response.data.savedBooking._id}`);
           }, 2000);
         } else {
           setServerError(
