@@ -36,7 +36,10 @@ const Package = () => {
     if (!token) {
       Navigate("/login");
     }
-    Navigate(`/book/${packageId}`);
+    else {
+
+      Navigate(`/book/${packageId}`);
+    }
     
   };
 
