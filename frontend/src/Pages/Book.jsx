@@ -138,7 +138,7 @@ const Book = () => {
     const fetchData = async () => {
       try {
         if (!token) {
-          navigate("/login");
+          navigate("/unauthenticated");
         }
         const response = await axios.get(
           `http://localhost:8000/api/packages/${packageId}`
