@@ -14,7 +14,7 @@ import path from 'path';
 const app = express();
 app.use(
     cors({
-      origin: 'http://localhost:3000', // Replace '*' with your frontend's URL
+      origin: 'https://travelgo.chinmayh.me', // Replace '*' with your frontend's URL
       credentials: true, // Allow cookies to be sent
     })
   );
