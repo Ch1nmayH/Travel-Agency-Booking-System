@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { motion } from "framer-motion";
 import UserContext from "../utils/CreateContext";
+import { toast } from "react-toastify";
 
 const Package = () => {
   const { packageId } = useParams();
@@ -11,6 +12,7 @@ const Package = () => {
   const [error, setError] = useState(null);
   const { token } = useContext(UserContext);
   const Navigate = useNavigate();
+
   useEffect(() => {
     const fetchPackage = async () => {
       try {
@@ -34,7 +36,13 @@ const Package = () => {
 
   const handleBookNow = () => {
     if (!token) {
-      Navigate("/login");
+      toast.info("Redirecting to login page...");
+      toast.error("Please login to book a package");
+      
+      setTimeout(() => {
+        Navigate("/login");
+      }, 2000);
+      
     }
     else {
 

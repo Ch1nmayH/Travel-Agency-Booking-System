@@ -17,6 +17,12 @@ import UserContext from "./utils/CreateContext";
 import Book from "./Pages/Book";
 import BookingSuccess from "./Pages/BookingSuccess";
 
+
+// Importing toastify module
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+
 const Layout = () => (
   <div className="flex flex-col min-h-screen bg-gray-100">
     <NavBar />
@@ -89,6 +95,19 @@ function App() {
     <>
       <UserContext.Provider value={{ token, setToken }}>
         <RouterProvider router={router} />;
+        {/* Global ToastContainer */}
+        <ToastContainer
+          position="top-right"
+          autoClose={3000}          // Auto close after 3 seconds
+          hideProgressBar={false}   // Show progress bar
+          newestOnTop={true}        // Display new toasts on top
+          closeOnClick              // Close toast on click
+          rtl={false}               // Disable RTL
+          pauseOnFocusLoss={false}  // Keep running if focus is lost
+          draggable={true}          // Allow dragging
+          pauseOnHover={true}       // Pause timer when hovered
+          theme="light"             // Use light theme
+        />
       </UserContext.Provider>
     </>
   );
