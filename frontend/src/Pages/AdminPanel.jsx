@@ -31,7 +31,7 @@ const AdminPanel = () => {
       }, 2000);
     } else {
       
-        const adminValidation =  axios.get(
+        const adminValidation =  axios.post(
           `${API_BASE_URL}/api/admin/verify`,
           {},
           {
