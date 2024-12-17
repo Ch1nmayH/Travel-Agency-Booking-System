@@ -4,6 +4,7 @@ import axios from "axios";
 import wallpaper from "../Assets/formBg.png";
 import Cookies from "js-cookie";
 import UserContext from "../utils/CreateContext";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -74,9 +75,16 @@ const Login = () => {
         setToken(response.data.token);
 
         if (response.data.isAdmin) {
-          navigate("/admin"); // Redirect to admin dashboard if user is admin
-        } else navigate("/");
-      }
+          toast.success("Logged in as Admin.");
+          setTimeout(() => {
+            navigate("/admin");
+          }, 2000);
+        } else {
+          toast.success("Logged in successfully.");
+          setTimeout(() =>
+          navigate("/"), 2000);
+        }
+      } 
     } catch (error) {
       if (error.response && error.response.status === 401) {
         setPasswordError("Invalid password");

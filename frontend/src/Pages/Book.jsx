@@ -3,6 +3,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import wallpaper from "../Assets/formBg.png";
 import UserContext from "../utils/CreateContext";
+import { toast } from "react-toastify";
 
 const Book = () => {
   const { token, setToken } = useContext(UserContext);
@@ -116,8 +117,13 @@ const Book = () => {
         );
   
         console.log(response.data);
+        toast.success("Booking Successful.");
         if (response.status === 201) {
-          navigate(`/bookingSuccess/${response.data._id}`);
+          setTimeout(() => {
+            navigate(`/bookingSuccess/${response.data._id}`);
+          }
+          , 2000);
+            
         } else {
           setServerError(
             "Due to unforseen circumstances, booking failed. Please try again."

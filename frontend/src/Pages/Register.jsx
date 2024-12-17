@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import wallpaper from "../Assets/formBg.png";
+import {toast} from "react-toastify";
 
 const Register = () => {
   const [firstName, setFirstName] = useState("");
@@ -92,7 +93,10 @@ const Register = () => {
         setEmailError("Email already exists");
       } 
       else if (response.status === 201) {
-        navigate("/login");
+        toast.success("User registered successfully. Redirecting to login page...");
+        setTimeout(() => {
+          navigate("/login");
+        }, 2000);
       }
     } catch (error) { 
       setServerError("Error registering user. Please try again.");
