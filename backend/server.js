@@ -12,7 +12,13 @@ import path from 'path';
 
 
 const app = express();
-app.use(cors());
+app.use(
+    cors({
+      origin: 'http://localhost:3000', // Replace '*' with your frontend's URL
+      credentials: true, // Allow cookies to be sent
+    })
+  );
+  
 app.use(bodyParser.json(), bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
