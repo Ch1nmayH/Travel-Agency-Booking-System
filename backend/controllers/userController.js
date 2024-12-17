@@ -66,6 +66,28 @@ const signin = async (req, res) => {
     }
 }
 
-export default {signup, signin};
+const validateUser = async (req, res) => {
+    const token = req.cookies.token;
+    if (!token) {
+        return res.status(401).json({ error: "User not found" });
+    }
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    if (!decoded) {
+        return res.status(401).json({ error: "User not found" });
+    }
+
+    try {
+        const user = await User.findById(decoded.id);
+        if (!user) {
+            return res.status(401).json({ error: "User not found" });
+        }
+        res.status(200).json({_id : user._id});
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Server error" });
+    }
+}
+
+export default {signup, signin, validateUser};
 
 
