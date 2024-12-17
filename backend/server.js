@@ -8,11 +8,17 @@ import bookingRoutes from './routes/bookingRoutes.js';
 import adminRoutes from './routes/adminRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 import cookieParser from 'cookie-parser';
+import path from 'path';
+
 
 const app = express();
 app.use(cors());
 app.use(bodyParser.json(), bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
+
+// Serve static files from the 'uploads' directory
+const __dirname = path.resolve();
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 app.use('/api/packages', packagesRoutes);
 app.use('/api/bookings', bookingRoutes);
