@@ -44,7 +44,7 @@ const Packages = () => {
 
       {/* Packages Grid */}
       <div className="flex flex-wrap justify-center">
-        {packages.map((singlePackage) => ( console.log(singlePackage),
+        {packages.map((singlePackage) => ( 
           
           <PackageCard
             key={singlePackage._id}

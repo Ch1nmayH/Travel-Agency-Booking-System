@@ -12,8 +12,9 @@ const PackageCard = ({ singlePackage }) => {
   const { token } = useContext(UserContext);
   const Navigate = useNavigate();
   const handleBookNow = () => {
-    toast.error("Please login to book a package");
+    
     if (!token) {
+      toast.error("Please login to book a package");
       setTimeout(() => {
         Navigate("/login");
       }, 1000);
