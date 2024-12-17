@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 
 const FeaturedPackage = ({ singlePackage }) => {
   const navigate = useNavigate();
+  //API base URL
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
   const handleClick = () => {
     navigate(`/package/${singlePackage._id}`); // Navigate to the package's detail page
   };
@@ -14,7 +16,7 @@ const FeaturedPackage = ({ singlePackage }) => {
       {console.log(singlePackage)}
       <div className="flex flex-col items-center">
         <img
-          src={`http://localhost:8000/${singlePackage.image}`}
+          src={`${API_BASE_URL}/${singlePackage.image}`}
           alt={singlePackage.title}
           className="w-full h-48 object-contain rounded-md mb-4"
         />

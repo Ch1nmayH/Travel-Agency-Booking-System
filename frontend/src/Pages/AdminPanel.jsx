@@ -7,6 +7,10 @@ import { useNavigate } from "react-router-dom";
 
 const AdminPanel = () => {
   const { token, setToken } = useContext(UserContext);
+
+  // API base URL
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
   const Navigate = useNavigate();
   const [packages, setPackages] = useState([]);
   const [bookings, setBookings] = useState([]);
@@ -26,34 +30,33 @@ const AdminPanel = () => {
         Navigate("/unAuthenticated");
       }, 2000);
     } else {
-      try {
-        const adminValidation = axios.get(
-          "http://localhost:8000/api/admin/verify",
+      
+        const adminValidation =  axios.get(
+          `${API_BASE_URL}/api/admin/verify`,
           {},
           {
             withCredentials: true,
           }
-        );
-
-        if (adminValidation.status === 201 && adminValidation.data.isAdmin) {
-          toast.success("Welcome Admin!");
-        } else {
-          toast.error("Unauthorized access. Redirecting to login page...");
-
-          Navigate("/notAuthorized");
-        }
-      } catch (error) {
+        ).then(adminValidation =>{
+          console.log("Admin validation:", adminValidation);
+          if (adminValidation.status === 201 && adminValidation.data.isAdmin) {
+            toast.success("Welcome Admin!");
+          } else {
+            toast.error("Unauthorized access. Redirecting to login page...");
+            Navigate("/notAuthorized");
+          }
+        }).catch(error => {
         console.error("Error validating admin:", error);
         toast.error("Unauthorized access. Redirecting to login page...");
         Navigate("/notAuthorized");
-      }
+      })
     }
-  }, [token,]);
+  }, [token]);
 
   useEffect(() => {
     // Fetch packages when the component mounts
     axios
-      .get("http://localhost:8000/api/packages")
+      .get(`${API_BASE_URL}/api/packages`)
       .then((response) => setPackages(response.data))
       .catch((error) => console.error("Error fetching packages:", error));
   }, []);
@@ -84,7 +87,7 @@ const AdminPanel = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/admin/packages",
+        `${API_BASE_URL}/api/admin/packages`,
         formDataToSend,
         {
           headers: {
@@ -110,7 +113,7 @@ const AdminPanel = () => {
     const updatedPackage = packages.find((pkg) => pkg._id === id);
     try {
       await axios.put(
-        `http://localhost:8000/api/admin/packages/${id}`,
+        `${API_BASE_URL}/api/admin/packages/${id}`,
         updatedPackage
       );
       toast.success("Package updated successfully!");
@@ -121,7 +124,7 @@ const AdminPanel = () => {
 
   const handleDeletePackage = async (id) => {
     try {
-      await axios.delete(`http://localhost:8000/api/admin/packages/${id}`);
+      await axios.delete(`${API_BASE_URL}/api/admin/packages/${id}`);
       setPackages(packages.filter((pkg) => pkg._id !== id));
       toast.success("Package deleted successfully!");
     } catch (error) {
@@ -132,7 +135,7 @@ const AdminPanel = () => {
   const handleViewBookings = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:8000/api/admin/bookings"
+        `${API_BASE_URL}/api/admin/bookings`
       );
       setBookings(response.data);
     } catch (error) {

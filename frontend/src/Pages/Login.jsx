@@ -17,6 +17,10 @@ const Login = () => {
   const [serverError, setServerError] = useState("");
   const navigate = useNavigate();
 
+  //API base URL
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
+
   useEffect(() => {
     if (token) {
       navigate("/");
@@ -54,11 +58,13 @@ const Login = () => {
     try {
       // Send login request to the backend
       const response = await axios.post(
-        "http://localhost:8000/api/user/signin",
+        `${API_BASE_URL}/api/user/signin`,
         {
           email,
           password,
-          credentials: "include",
+          
+        },{
+          withCredentials: true
         }
       );
 

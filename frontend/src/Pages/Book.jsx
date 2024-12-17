@@ -11,6 +11,9 @@ const Book = () => {
   const packageId = useParams().packageId;
   const [packageData, setPackageData] = useState({});
 
+  // API base URL
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [mobile, setMobile] = useState("");
@@ -80,7 +83,7 @@ const Book = () => {
     try {
       // Backend request using Axios
       const valiDateUser = await axios.post(
-        "http://localhost:8000/api/user/validateUser",
+        `${API_BASE_URL}/api/user/validateUser`,
         {},
         {
           withCredentials: true,
@@ -90,6 +93,8 @@ const Book = () => {
         }
       );
 
+      console.log(valiDateUser);
+
       if (
         valiDateUser.status === 200 &&
         valiDateUser.data.error === "User not found"
@@ -97,7 +102,7 @@ const Book = () => {
         navigate("/login");
       } else {
         const response = await axios.post(
-          "http://localhost:8000/api/bookings",
+          `${API_BASE_URL}/api/bookings`,
           {
             name: fullName,
             email: email,
@@ -141,7 +146,7 @@ const Book = () => {
           navigate("/unauthenticated");
         }
         const response = await axios.get(
-          `http://localhost:8000/api/packages/${packageId}`
+          `${API_BASE_URL}/api/packages/${packageId}`
         );
         setPackageData(response.data);
         console.log(response.data);

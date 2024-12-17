@@ -13,11 +13,14 @@ const Package = () => {
   const { token } = useContext(UserContext);
   const Navigate = useNavigate();
 
+   // API base URL
+   const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
   useEffect(() => {
     const fetchPackage = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8000/api/packages/${packageId}`,
+          `${API_BASE_URL}/api/packages/${packageId}`,
           {}
         );
         setPackageData(response.data);
@@ -62,7 +65,7 @@ const Package = () => {
         {/* Package Image */}
         <div className="w-full lg:w-5/12 max-w-md">
           <motion.img
-            src={`http://localhost:8000/${packageData.image}`}
+            src={`${API_BASE_URL}/${packageData.image}`}
             alt={packageData.title}
             className="w-full h-72 object-contain rounded-lg shadow-lg"
             initial={{ opacity: 0 }}

@@ -11,6 +11,9 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [cpassword, setCPassword] = useState("");
 
+  // API base URL
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
   // Individual error states
   const [firstNameError, setFirstNameError] = useState("");
   const [lastNameError, setLastNameError] = useState("");
@@ -81,7 +84,7 @@ const Register = () => {
     try {
       // Backend request using Axios
       const response = await axios.post(
-        "http://localhost:8000/api/user/signup",
+        `${API_BASE_URL}/api/user/signup`,
         {
           name: firstName + " " + lastName,
           email,

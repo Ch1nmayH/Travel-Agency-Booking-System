@@ -9,11 +9,14 @@ const BookingSuccess = () => {
   const [bookingDetails, setBookingDetails] = useState(null);
   const [loading, setLoading] = useState(true);
 
+   // API base URL
+   const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
   useEffect(() => {
     const fetchBookingDetails = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8000/api/admin/bookings/${bookingId}`
+          `${API_BASE_URL}/api/admin/bookings/${bookingId}`
         );
         setBookingDetails(response.data);
         console.log(response.data);

@@ -9,10 +9,13 @@ const HomePage = () => {
   const [loading, setLoading] = useState(true); // Add loading state
   const [error, setError] = useState(null); // Add error state
 
+  //API base URL
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
   useEffect(() => {
     const fetchPackages = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/api/packages");
+        const response = await axios.get(`${API_BASE_URL}/api/packages`);
         if (Array.isArray(response.data)) {
           setPackages(response.data);
         } else {

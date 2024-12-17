@@ -11,12 +11,13 @@ const Packages = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { token } = useContext(UserContext);
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
   useEffect(() => {
     const fetchPackage = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8000/api/packages/`,
+          `${API_BASE_URL}/api/packages`,
           {}
         );
         setPackages(response.data);
