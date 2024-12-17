@@ -15,6 +15,6 @@ router.put("/packages", upload.single("image"), packagesController.updatePackage
 router.delete("/packages", packagesController.deletePackages); 
 
 //Bookings Routes
-router.get("/bookings", bookingController.getBookings);
+router.get("/bookings/:id?", bookingController.getBookings);
 
 export default router;

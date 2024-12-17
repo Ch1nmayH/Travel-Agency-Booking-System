@@ -34,7 +34,7 @@ const postBookings = async (req, res) => {
             totalPrice
         };
         const savedBooking = await Booking.create(newBooking);
-        res.json(savedBooking);
+        res.status(201).json({savedBooking}, {message: "Booking Successful"}, {bookingId: savedBooking._id});
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: "Server Error" });
@@ -43,7 +43,14 @@ const postBookings = async (req, res) => {
 
 const getBookings = async (req, res) => {
     try {
-        const bookings = await Booking.find().populate("package").populate("user");
+
+        const bookingId = req.params.id;
+        if(bookingId){
+            const booking = await Booking.findById(bookingId).populate("packageId").populate("user");
+            res.json(booking);
+            return;
+        }
+        const bookings = await Booking.find().populate("packageId").populate("user");
         res.json(bookings);
     } catch (error) {
         console.error(error);
