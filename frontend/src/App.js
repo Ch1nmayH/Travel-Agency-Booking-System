@@ -11,7 +11,6 @@ import UnauthorizedPage from "./Pages/UnauthorizedPage";
 import Register from "./Pages/Register";
 import Login from "./Pages/Login";
 import AdminPanel from "./Pages/AdminPanel";
-import About from "./Pages/About";
 import Package from "./Pages/Package";
 import Packages from "./Pages/Packages";
 import UserContext from "./utils/CreateContext";
@@ -35,10 +34,6 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <HomePage />,
-      },
-      {
-        path: "/about",
-        element: <About />,
       },
       {
         path: "/package/:packageId",
