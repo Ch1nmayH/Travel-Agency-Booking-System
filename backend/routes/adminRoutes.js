@@ -19,6 +19,6 @@ router.delete("/packages", packagesController.deletePackages);
 router.get("/bookings/:id?", bookingController.getBookings);
 
 //verify Admin
-router.get("/verify", userController.verifyAdmin);
+router.post("/verify", userController.verifyAdmin);
 
 export default router;
