@@ -15,6 +15,7 @@ import Package from "./Pages/Package";
 import Packages from "./Pages/Packages";
 import UserContext from "./utils/CreateContext";
 import Book from "./Pages/Book";
+import BookingSuccess from "./Pages/BookingSuccess";
 
 const Layout = () => (
   <div className="flex flex-col min-h-screen bg-gray-100">
@@ -56,6 +57,10 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register />,
+      },
+      {
+        path : "/bookingSuccess/:bookingId",
+        element : <BookingSuccess/>
       },
     ],
   },
