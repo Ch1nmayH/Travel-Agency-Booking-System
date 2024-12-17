@@ -34,7 +34,8 @@ const postBookings = async (req, res) => {
             totalPrice
         };
         const savedBooking = await Booking.create(newBooking);
-        res.status(201).json({savedBooking}, {message: "Booking Successful"}, {bookingId: savedBooking._id});
+        let bookingId = savedBooking._id.toString();
+        res.status(201).json({savedBooking}, {message: "Booking Successful"}, {bookingId});
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: "Server Error" });
