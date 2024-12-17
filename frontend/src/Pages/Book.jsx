@@ -96,7 +96,6 @@ const Book = () => {
       ) {
         navigate("/login");
       } else {
-        
         const response = await axios.post(
           "http://localhost:8000/api/bookings",
           {
@@ -115,15 +114,13 @@ const Book = () => {
             },
           }
         );
-  
+
         console.log(response.data);
         toast.success("Booking Successful.");
         if (response.status === 201) {
           setTimeout(() => {
             navigate(`/bookingSuccess/${response.data._id}`);
-          }
-          , 2000);
-            
+          }, 2000);
         } else {
           setServerError(
             "Due to unforseen circumstances, booking failed. Please try again."
@@ -140,6 +137,9 @@ const Book = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        if (!token) {
+          navigate("/login");
+        }
         const response = await axios.get(
           `http://localhost:8000/api/packages/${packageId}`
         );
@@ -151,12 +151,6 @@ const Book = () => {
     };
     fetchData();
   }, [packageId]);
-
-  useEffect(() => {
-    if (!token) {
-      navigate("/");
-    }
-  }, []);
 
   return (
     <div
