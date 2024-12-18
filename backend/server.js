@@ -12,12 +12,14 @@ import path from 'path';
 
 
 const app = express();
+// Update CORS policy to allow both 'http' and 'https' versions of the frontend
 app.use(
-    cors({
-      origin: 'https://travelgo.chinmayh.me', // Replace '*' with your frontend's URL
-      credentials: true, // Allow cookies to be sent
-    })
-  );
+  cors({
+    origin: ['https://travel-agency-booking-system-1-fvkm.onrender.com/', 'http://travel-agency-booking-system-1-fvkm.onrender.com/'], //>
+    credentials: true, // Allow cookies to be sent
+  })
+);
+
   
 app.use(bodyParser.json(), bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
