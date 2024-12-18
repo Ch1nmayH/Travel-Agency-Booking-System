@@ -15,7 +15,7 @@ const app = express();
 // Update CORS policy to allow both 'http' and 'https' versions of the frontend
 app.use(
   cors({
-    origin: ['https://travel-agency-booking-system-1-fvkm.onrender.com/', 'http://travel-agency-booking-system-1-fvkm.onrender.com/'], //>
+    origin: "https://travel-agency-booking-system-1-fvkm.onrender.com", 
     credentials: true, // Allow cookies to be sent
   })
 );
